@@ -1,0 +1,44 @@
+<template name="project">
+	Pending:
+	<div id="Pending" class="cat">
+		{{#each pending}}
+			{{> catObj}}
+		{{/each}}
+	</div>
+
+	Objectives:
+	<div id="Objective" class="cat">
+		{{#each objectives}}
+			{{> catObj}}
+		{{/each}}
+	</div>
+
+	Goals:
+	<div id="Goal" class="cat">
+		{{#each goals}}
+			{{> catObj}}
+		{{/each}}
+	</div>
+
+	Strategies:
+	<div id="Strategy" class="cat">
+		{{#each strategies}}
+			{{> catObj}}
+		{{/each}}
+	</div>
+
+	Tatics:
+	<div id="Tatic" class="cat">
+		{{#each tatics}}
+			{{> catObj}}
+		{{/each}}
+	</div>
+</template>
+
+
+<template name="catObj">
+	<div class="item" item_id="{{_id}}">
+		{{Description}}
+	</div>
+</template>
+

@@ -1,0 +1,11 @@
+.cat{
+	border: 1px black solid;
+	height: 200px;
+	width: 400px;
+}
+
+.item{
+	border: 1px black solid;
+	height: 50px;
+	width: 50px;
+}

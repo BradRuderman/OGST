@@ -1,0 +1,32 @@
+<template name="admin">
+	{{#if currentUser}}
+		<div>
+			<input type="button" value="Log Out" id="admin-logout" />
+		</div>
+		<h2>Create/Edit Project</h2>
+		<h2>View Project</h2>
+		{{> viewProjects}}
+	{{else}}
+		{{> adminLogin}}
+	{{/if}}
+</template>
+
+
+<template name="viewProjects">
+	{{#if currentProject}}
+		c
+		{{> categoriesAdmin}}
+	{{else}}
+		{{> projectsListDd}}
+	{{/if}}
+</template>
+
+<template name="adminLogin">
+	Enter Password:
+	<input type="password" id="admin-password" placeholder="Enter Password" />
+	<input type="button" value="Login" id="admin-login" />
+</template>
+
+<template name="categoriesAdmin">
+	Blah
+</template>

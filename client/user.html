@@ -1,0 +1,50 @@
+<template name="user">
+	<div id="user">
+		{{#if isNameSet}}
+	      	Name: {{full_name}}
+	      	<br/>
+	      	{{> projectsList}}
+	    {{else}}
+			<h1>Welcome to OGST</h1>
+			<h3>A service provided by Accenture Technology Labs</h3>
+			Enter your full name to begin...</br>
+			<input type="text" id="full-name" placeholder="Full Name"/>
+			<input type="button" value="Click" id="name-submit" />
+	    {{/if}}
+	</div>
+</template>
+
+<template name="projectsList">
+	{{#if current}}
+		Current Project: {{current}}
+		{{> categories}}
+	{{else}}
+		{{> projectsListDd}}
+	{{/if}}
+</template>
+
+<template name="categories">
+	{{#each categories_list}}
+		<div class="category" id="{{name}}">{{name}} : {{count}}</div>
+	{{/each}}
+</template>
+
+<template name="addDialog">
+	<div class="mask"> </div>
+	<div class="modal">
+		<div class="modal-header">
+		  <button type="button" class="close cancel">&times;</button>
+		  <h3>Add {{category}}</h3>
+		</div>
+
+		<div class="modal-body">
+
+		  <textarea class="description span5"></textarea>
+
+		</div>
+
+		<div class="modal-footer">
+		  <a href="#" class="btn btn-primary save">Save</a>
+		</div>
+	</div>
+</template>

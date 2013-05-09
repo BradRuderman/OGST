@@ -1,0 +1,35 @@
+<head>
+  <title>Accenture Tech Labs - OGST</title>
+</head>
+
+<body>
+	{{> page}}
+</body>
+
+<template name="page">
+	{{#if showAddDialog}}
+		{{> addDialog}}
+	{{/if}}
+	{{#if currentPageIs 'user' }}
+		{{> user}}
+	{{/if}}
+	{{#if currentPageIs 'admin' }}
+		{{> admin}}
+	{{/if}}
+	{{#if currentPageIs 'project'}}
+		{{> project}}
+	{{/if}}
+</template>
+
+<template name="projectsListDd">
+	<select id="project">		
+		{{#if projects}}
+			<option>Select a project...</option>
+			{{#each projects}}
+				<option value="{{_id}}">{{name}}</option>
+			{{/each}}
+		{{else}}
+			<option>No Projects Yet...</option>
+		{{/if}}
+	</select>
+</template>
