@@ -1,32 +1,45 @@
 <template name="admin">
-	{{#if currentUser}}
-		<div class="pull-right">
-			<a href="#" class="btn btn-primary save" id="admin-logout">Logout</a>
-		</div>
-		<h2>Create/Edit Project</h2>
-		<h2>View Project</h2>
-		{{> viewProjects}}
-	{{else}}
-		{{> adminLogin}}
-	{{/if}}
+	<div class="container" id="admin">
+		{{#if currentUser}}
+			<div class="row admin-row">
+				Create/Edit Project: 
+				<button class="btn" type="button" id="new-project">New Project</button>
+			</div>
+			<div class="row admin-row">View Project: {{> viewProjects}}</div>
+		{{else}}
+			{{> adminLogin}}
+		{{/if}}
+	</div>
 </template>
 
 
 <template name="viewProjects">
-	{{#if currentProject}}
-		c
-		{{> categoriesAdmin}}
-	{{else}}
-		{{> projectsListDd}}
-	{{/if}}
+	{{> projectsListDd}}
 </template>
 
 <template name="adminLogin">
-	Enter Password:
-	<input type="password" id="admin-password" placeholder="Enter Password" />
-	<a href="#" class="btn btn-primary save" id="admin-login">Login</a>
+	<div class="input-append">
+	  	<input class="span2" id="admin-password" type="text" placeholder="Enter Admin Password...">
+	  	<button class="btn" type="button" id="admin-login">Login</button>
+	</div>
 </template>
 
-<template name="categoriesAdmin">
-	Blah
+<template name="addDialogNewProject">
+	<div class="modal-backdrop fade in"></div>
+	<div class="modal">
+		<div class="modal-header">
+		  <button type="button" class="close cancel">&times;</button>
+		  <h3>Add {{category}}</h3>
+		</div>
+
+		<div class="modal-body">
+
+		  <textarea class="description"></textarea>
+
+		</div>
+
+		<div class="modal-footer">
+		  <a href="#" class="btn btn-primary save">Save</a>
+		</div>
+	</div>
 </template>

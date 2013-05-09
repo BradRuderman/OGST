@@ -1,3 +1,4 @@
+
 var Router = Backbone.Router.extend({
   routes: {
     "":                 "user", 
@@ -19,9 +20,11 @@ var Router = Backbone.Router.extend({
   },
 
   project: function(project_id){
-    if (Meteor.user() !== null || project_id === null){
+    if (Meteor.user() !== null && project_id !== null){
       Session.set('currentPage','project');
-      Session.set('currentProject', Projects.findOne({"_id": project_id }));
+      var project = Projects.findOne({"_id": project_id });
+      console.log(project);
+      Session.set('currentProject', project);
     }
     else{
       Session.set('currentPage','admin');
@@ -51,7 +54,7 @@ Template.projectsListDd.events({
     Session.set("currentProject", project);
     if (Session.get("currentPage") === "admin")
     {
-      app.navigate("/project/" + project.toString(), { "trigger" : true });
+      app.navigate("/project/" + project._id.toString(), { "trigger" : true });
     }
   }
 });
@@ -68,3 +71,11 @@ Template.page.full_name = function(){
 Template.page.isNameSet = function(){
   return Template.user.isNameSet();
 };
+
+Template.page.events({
+  'click #logout' : function(event,template){
+    Session.set("name",null);
+    Session.set("currentProject",null)
+    Meteor.logout();
+  }
+})

@@ -48,7 +48,7 @@ Template.categories.categories_list = [
 
 Template.categories.events({
   'click .category' : function(event,template){
-    Session.set("showAddDialog",$(event.target).attr('id'));
+    Session.set("showAddDialog",$(event.currentTarget).attr('id'));
   }
 });
 
@@ -62,4 +62,25 @@ Template.projectsList.full_name = function(){
   return Session.get("name");
 };
 
+/* Template Add Dialoag Box */
+
+Template.addDialog.category = function(){
+  return Session.get("showAddDialog");
+};
+
+Template.addDialog.events({
+  'click .save': function (event, template) {
+    Categories.insert({
+      type: Session.get("showAddDialog"),
+      user: Session.get("name"),
+      project: Session.get("currentProject"),
+      Description: template.find(".description").value.trim()
+    });
+    Session.set("showAddDialog",false);
+  },
+
+  'click .cancel': function () {
+    Session.set("showAddDialog", false);
+  }
+});
 

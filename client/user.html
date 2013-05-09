@@ -38,15 +38,14 @@
 <template name="categories">
 	{{#each categories_list}}
 		<div class="category" id="{{name}}">
-			<div class="cat-name">
-				{{name}}
-			</div>
-			{{count}}
+			<p>{{name}}</p>
+			<p>{{count}}</p>
 		</div>
 	{{/each}}
 </template>
 
 <template name="addDialog">
+	<div class="modal-backdrop fade in"></div>
 	<div class="modal">
 		<div class="modal-header">
 		  <button type="button" class="close cancel">&times;</button>

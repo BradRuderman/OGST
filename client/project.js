@@ -43,29 +43,8 @@ Template.project.rendered = function(){
 	$('.cat').sortable({ connectWith: ".cat", stop: function( event, ui ) {
 		var newCat = ui.item.parent().attr('id');
 		var id = ui.item.attr('item_id');
-		console.log('item_id' + id.toString());
 		updateItem(id,newCat);
+		$(ui.item).remove();
 	}});
 }
 
-/* Template Add Dialoag Box */
-
-Template.addDialog.category = function(){
-  return Session.get("showAddDialog");
-};
-
-Template.addDialog.events({
-  'click .save': function (event, template) {
-    Categories.insert({
-      type: Session.get("showAddDialog"),
-      user: Session.get("name"),
-      project: Session.get("currentProject"),
-      Description: template.find(".description").value.trim()
-    });
-    Session.set("showAddDialog",false);
-  },
-
-  'click .cancel': function () {
-    Session.set("showAddDialog", false);
-  }
-});

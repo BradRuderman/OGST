@@ -7,23 +7,25 @@
 </body>
 
 <template name="page">
-	{{#if showAddDialog}}
-		{{> addDialog}}
-	{{/if}}
-	{{#if currentPageIs 'user' }}
-		{{> user}}
-	{{/if}}
-	{{#if currentPageIs 'admin' }}
-		{{> admin}}
-	{{/if}}
-	{{#if currentPageIs 'project'}}
-		{{> project}}
-	{{/if}}
+	<div id="wrap">
+		{{#if showAddDialog}}
+			{{> addDialog}}
+		{{/if}}
+		{{#if currentPageIs 'user' }}
+			{{> user}}
+		{{/if}}
+		{{#if currentPageIs 'admin' }}
+			{{> admin}}
+		{{/if}}
+		{{#if currentPageIs 'project'}}
+			{{> project}}
+		{{/if}}
+	</div>
 	<div id="footer">
 	    <div class="container">
 			<div class="pull-left">
 				{{# if isNameSet}}
-					<span class="muted">{{full_name}}</span> (<a href="#">Log Out</a>)
+					<span class="muted">{{full_name}}</span> (<a id="logout" href="#">Log Out</a>)
 				{{/if}}
 			</div>
 			<div class="pull-right muted">
