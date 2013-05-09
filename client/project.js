@@ -1,6 +1,18 @@
 
 /* Helpers */
 
+var updateItem = function(mid,newCat){
+	item = Categories.find({_id: mid}).fetch();
+	console.log(item);
+	Categories.update(
+	   { _id: mid },
+	   {
+	     $set: { 'type': newCat },
+	     $push: { 'history': item },
+	   }
+	)
+}
+
 var getProjectsCat = function(catName){
   return Categories.find( { "type": catName, "project" : Session.get("currentProject") })
 };
@@ -36,16 +48,24 @@ Template.project.rendered = function(){
 	}});
 }
 
-/* Helpers */
+/* Template Add Dialoag Box */
 
-var updateItem = function(mid,newCat){
-	item = Categories.find({_id: mid}).fetch();
-	console.log(item);
-	Categories.update(
-	   { _id: mid },
-	   {
-	     $set: { 'type': newCat },
-	     $push: { 'history': item },
-	   }
-	)
-}
+Template.addDialog.category = function(){
+  return Session.get("showAddDialog");
+};
+
+Template.addDialog.events({
+  'click .save': function (event, template) {
+    Categories.insert({
+      type: Session.get("showAddDialog"),
+      user: Session.get("name"),
+      project: Session.get("currentProject"),
+      Description: template.find(".description").value.trim()
+    });
+    Session.set("showAddDialog",false);
+  },
+
+  'click .cancel': function () {
+    Session.set("showAddDialog", false);
+  }
+});

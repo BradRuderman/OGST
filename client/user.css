@@ -1,1 +1,44 @@
 /* CSS declarations go here */
+#project{
+	text-align: center;
+}
+
+.category{
+	height:60px;
+	border:1px black solid;
+	margin: 15px;
+}
+
+.cat-name{
+	margin-top:10px;
+}
+
+#Tatic{
+	background-color: teal;
+}
+
+#Strategy{
+	background-color: blue;
+}
+
+#Objective{
+	background-color: orange;
+}
+
+#Goal{
+	background-color: green;
+}
+
+.description{
+	width:97%%;
+	margin-right:10px;
+	resize: vertical;
+}
+
+#full-name{
+	width:200px;
+}
+
+#project_choice{
+	margin:25px;
+}

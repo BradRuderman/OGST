@@ -21,7 +21,7 @@ var Router = Backbone.Router.extend({
   project: function(project_id){
     if (Meteor.user() !== null || project_id === null){
       Session.set('currentPage','project');
-      Session.set('currentProject', project_id);
+      Session.set('currentProject', Projects.findOne({"_id": project_id }));
     }
     else{
       Session.set('currentPage','admin');
@@ -46,7 +46,8 @@ Template.projectsListDd.projects = function(){
 
 Template.projectsListDd.events({
   'change #project' : function(event,template){
-    var project = template.find("#project").value.trim();
+    var project_id = template.find("#project").value.trim();
+    var project = Projects.findOne({"_id": project_id });
     Session.set("currentProject", project);
     if (Session.get("currentPage") === "admin")
     {
@@ -58,4 +59,12 @@ Template.projectsListDd.events({
 /* Template Page */
 Template.page.currentPageIs = function(page){
   return Session.get("currentPage") === page;
+};
+
+Template.page.full_name = function(){
+  return Template.projectsList.full_name();
+};
+
+Template.page.isNameSet = function(){
+  return Template.user.isNameSet();
 };
