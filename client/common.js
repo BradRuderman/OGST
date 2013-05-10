@@ -37,7 +37,10 @@ Template.page.showAddDialog = function () {
 
 /* Template Project List Drop Down */
 Template.projectsListDd.projects = function(){
-  return Projects.find();
+  if (Session.get('currentPage') === 'admin'){
+    return Projects.find();
+  }
+  return Projects.find({"visible":true});
 };
 
 Template.projectsListDd.events({
@@ -71,5 +74,6 @@ Template.page.events({
     Session.set("name",null);
     Session.set("currentProject",undefined)
     Meteor.logout();
+    app.navigate("/", {"trigger" : true});
   }
 })

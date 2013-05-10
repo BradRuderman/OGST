@@ -20,10 +20,6 @@ Template.admin.events({
   }
 });
 
-Template.addDialogNewProject.rendered = function(){
-  $(".datepicker" ).datepicker();
-};
-
 Template.admin.currentUser = function(){
   return Meteor.user();
 };
@@ -38,12 +34,10 @@ Template.addDialogNewProject.events({
   },
   'click #save-project' : function(event, template){
     var name = template.find("#project-name").value.trim();
-    var startDate = new Date(template.find("#start-date").value.trim());
-    var endDate = new Date(template.find("#end-date").value.trim());
+    var visible = $("#project-check").is(":checked");
     Projects.insert({
       "name" : name,
-      "start" : startDate,
-      "end" : endDate
+      "visible" : visible
     });
     Session.set("showAddProject", null);
   }

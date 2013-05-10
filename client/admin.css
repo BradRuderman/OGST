@@ -5,3 +5,7 @@
 .admin-row{
 	margin-top:20px;
 }
+
+#admin-password{
+	width: 200px;
+}
