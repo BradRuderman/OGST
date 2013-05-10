@@ -1,11 +1,17 @@
 .cat{
 	border: 1px black solid;
-	height: 200px;
-	width: 400px;
+	height: 150px;
+	width: 95%;
+
 }
 
 .item{
 	border: 1px black solid;
 	height: 50px;
 	width: 50px;
+	position: relative;
+}
+
+#Pending{
+	height:100px;
 }

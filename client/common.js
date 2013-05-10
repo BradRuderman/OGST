@@ -1,4 +1,3 @@
-
 var Router = Backbone.Router.extend({
   routes: {
     "":                 "user", 
@@ -20,21 +19,15 @@ var Router = Backbone.Router.extend({
   },
 
   project: function(project_id){
-    if (Meteor.user() !== null && project_id !== null){
-      Session.set('currentPage','project');
-      var project = Projects.findOne({"_id": project_id });
-      console.log(project);
-      Session.set('currentProject', project);
-    }
-    else{
-      Session.set('currentPage','admin');
-    }   
+    Session.set('currentPage','project');
+    Session.set('currentProjectId', project_id);
   }
 });
 var app = new Router;
 Meteor.startup(function () {
   Backbone.history.start({pushState: true});
 });
+
 
 /* Template Page */
 Template.page.showAddDialog = function () {
@@ -72,10 +65,11 @@ Template.page.isNameSet = function(){
   return Template.user.isNameSet();
 };
 
+
 Template.page.events({
   'click #logout' : function(event,template){
     Session.set("name",null);
-    Session.set("currentProject",null)
+    Session.set("currentProject",undefined)
     Meteor.logout();
   }
 })

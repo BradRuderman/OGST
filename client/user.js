@@ -16,7 +16,7 @@ Template.user.events({
 
 
 var getListCount = function(typeName){
-  return Categories.find( { "type": typeName, "user" : Session.get("name"), "project" : Session.get("currentProject") }).count();
+  return Categories.find( { "type": typeName, "user" : Session.get("name"), "project" : Session.get("currentProject")._id }).count();
 };
 
 Template.categories.categories_list = [
@@ -59,6 +59,10 @@ Template.projectsList.current = function(){
 };
 
 Template.projectsList.full_name = function(){
+  if (Meteor.user() != undefined)
+  {
+    return Meteor.user().emails[0].address;
+  }
   return Session.get("name");
 };
 
@@ -73,7 +77,7 @@ Template.addDialog.events({
     Categories.insert({
       type: Session.get("showAddDialog"),
       user: Session.get("name"),
-      project: Session.get("currentProject"),
+      project: Session.get("currentProject")._id,
       Description: template.find(".description").value.trim()
     });
     Session.set("showAddDialog",false);

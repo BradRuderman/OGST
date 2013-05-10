@@ -1,50 +1,70 @@
 
 /* Helpers */
 
-var updateItem = function(mid,newCat){
-	item = Categories.find({_id: mid}).fetch();
-	console.log(item);
+var updateItemLocation = function(mid,newCat,top,left){
 	Categories.update(
 	   { _id: mid },
 	   {
-	     $set: { 'type': newCat },
-	     $push: { 'history': item },
+	     $set: { 'type': newCat, 'top': top, 'left': left},
 	   }
 	)
 }
 
 var getProjectsCat = function(catName){
-  return Categories.find( { "type": catName, "project" : Session.get("currentProject") })
-};
-
-/* Template Projects */
-
-Template.project.tatics = function(){
-	return getProjectsCat("Tatic");
+	return Categories.find( { "type": catName, "project" : Session.get("currentProject")._id }, {sort : {"sort" : 1} });
 }
 
-Template.project.objectives = function(){
-	return getProjectsCat("Objective");
-}
+Meteor.subscribe("categories", function(){
+	Template.project.tatics = function(){
+		return getProjectsCat("Tatic");
+	}
 
-Template.project.strategies = function(){
-	return getProjectsCat("Strategy");
-}
+	Template.project.objectives = function(){
+		return getProjectsCat("Objective");
+	}
 
-Template.project.goals = function(){
-	return getProjectsCat("Goal");
-}
+	Template.project.strategies = function(){
+		return getProjectsCat("Strategy");
+	}
 
-Template.project.pending = function(){
-	return getProjectsCat("Pending");
-}
+	Template.project.goals = function(){
+		return getProjectsCat("Goal");
+	}
+
+	Template.project.pending = function(){
+		return getProjectsCat("Pending");
+	}
+});
 
 Template.project.rendered = function(){
-	$('.cat').sortable({ connectWith: ".cat", stop: function( event, ui ) {
-		var newCat = ui.item.parent().attr('id');
-		var id = ui.item.attr('item_id');
-		updateItem(id,newCat);
-		$(ui.item).remove();
-	}});
+	$('.item').droppable({
+		accept:".cat"
+	});
+	$('.item').draggable({
+		helper: "clone"
+	});
 }
 
+/*stop: function( event, ui ) {
+			var newCat = $(ui.helper).parent().attr("id");
+			var top = ui.position.top;
+			var left = ui.position.left;
+			var mid = $(ui.helper).attr("item_id");
+			updateItemLocation(mid,newCat,top,left);
+		}*/
+var projectsHandle = Meteor.subscribe('projects', function(project_id){
+  	var project = Projects.findOne({"_id": Session.get("currentProjectId") });
+ 	Session.set('currentProject', project);
+});
+
+Template.project.isProjectLoading = function(){
+	return !projectsHandle.ready();
+};
+
+Template.project.currentProject = function(){
+	return Session.get('currentProject');
+};
+
+Template.project.currentUser = function(){
+  return Meteor.user();
+};

@@ -1,4 +1,7 @@
 <template name="admin">
+	{{#if showAddProject}}
+		{{> addDialogNewProject}}
+	{{/if}}
 	<div class="container" id="admin">
 		{{#if currentUser}}
 			<div class="row admin-row">
@@ -19,27 +22,34 @@
 
 <template name="adminLogin">
 	<div class="input-append">
-	  	<input class="span2" id="admin-password" type="text" placeholder="Enter Admin Password...">
+	  	<input class="span2" id="admin-password" type="password" placeholder="Enter Admin Password...">
 	  	<button class="btn" type="button" id="admin-login">Login</button>
 	</div>
 </template>
+
 
 <template name="addDialogNewProject">
 	<div class="modal-backdrop fade in"></div>
 	<div class="modal">
 		<div class="modal-header">
 		  <button type="button" class="close cancel">&times;</button>
-		  <h3>Add {{category}}</h3>
+		  <h3>Add New Project</h3>
 		</div>
 
 		<div class="modal-body">
-
-		  <textarea class="description"></textarea>
-
+			<fieldset>
+				<label>Project Name</label>
+				<input type="text" placeholder="Enter Project Name..." id="project-name">
+				<label>Start Date</label>
+				<input type="text" class="datepicker" id="start-date">
+				<label>End Date</label>
+				<input type="text" class="datepicker" id="end-date">
+				</label>
+			</fieldset>
 		</div>
 
 		<div class="modal-footer">
-		  <a href="#" class="btn btn-primary save">Save</a>
+		  <a href="#" class="btn btn-primary save" id="save-project">Save</a>
 		</div>
 	</div>
 </template>
