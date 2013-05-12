@@ -1,17 +1,19 @@
 .cat{
 	border: 1px black solid;
-	height: 150px;
 	width: 95%;
-
+	padding: 5px;
+	overflow: hidden;
+	min-height: 72px;
 }
 
 .item{
 	border: 1px black solid;
 	height: 50px;
 	width: 50px;
-	position: relative;
+	margin: 10px;
+	float:left;
 }
 
-#Pending{
-	height:100px;
-}
+#cat-container{
+	clear:both;
+};
