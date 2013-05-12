@@ -63,18 +63,18 @@ Template.project.rendered = function(){
 	$('.cat').sortable({
       connectWith: ".cat",
       stop: function(event,ui){
-      	catSubscription.stop();
+      	//catSubscription.stop();
       	var item = $(ui.item);
       	var newCat = item.parent().attr("id");
       	$.each(item.parent().children(), function(i,val){
       		var itemId = $(val).attr("item_id");
-      		console.log(newCat);
-      		console.log(i);
-      		console.log(itemId);
+      		//console.log(newCat);
+      		//console.log(i);
+      		//console.log(itemId);
       		updateItemLocation(itemId,newCat,i);
       	});
       	item.remove();
-      	catSubscription = subscribeCats();
+      	//catSubscription = subscribeCats();
       }
     });
 
