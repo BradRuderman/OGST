@@ -9,8 +9,17 @@ Template.adminLogin.events({
   'click #admin-login': function(event, template){
     var password = template.find("#admin-password").value.trim();
     Meteor.loginWithPassword("admin@test.com", password, function(){
-    	Session.set("name", Meteor.user().emails[0].address);
+      Session.set("name", Meteor.user().emails[0].address);
     });
+  },
+  'keypress #admin-password' : function(event, template){
+    if(event.charCode === 13)
+    {
+      var password = template.find("#admin-password").value.trim();
+      Meteor.loginWithPassword("admin@test.com", password, function(error){
+        Session.set("name", Meteor.user().emails[0].address);
+      });
+    }
   }
 })
 

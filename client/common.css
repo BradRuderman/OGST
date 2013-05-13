@@ -1,33 +1,27 @@
-html,
-body {
-  height: 100%;
-  /* The html and body elements cannot have any padding or margin. */
+* {
+  margin: 0;
 }
-
-/* Wrapper for page content to push down footer */
+html, body {
+  height: 100%;
+}
 #wrap {
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  /* Negative indent footer by it's height */
-  margin: 0 auto -60px;
+  margin: 0 auto -25px; /* the bottom margin is the negative value of the footer's height */
 }
-
-/* Set the fixed height of the footer here */
-#push,
-#footer {
-  height: 60px;
+#footer, #push {
+  height: 25px; /* .push must be the same height as .footer */
+  margin-top:15px;
 }
-#footer {
-  background-color: #f5f5f5;
+#footer{
+  background-color: #999;
+  border-top:1px black solid;
+  color:white;
 }
-
-/* Lastly, apply responsive CSS fixes as necessary */
-@media (max-width: 767px) {
-  #footer {
-    margin-left: -20px;
-    margin-right: -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+#footer-name{
+  margin-left:25px;
+}
+#footer-logo{
+  margin-right:25px;
 }

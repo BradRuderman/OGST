@@ -60,20 +60,28 @@ Template.project.rendered = function(){
 			newCat = $(this).attr("id");
 		}
 	});*/
+	var currentCat;
 	$('.cat').sortable({
       connectWith: ".cat",
+      start: function(event,ui){
+      	currentCat = $(ui.item).parent().attr("id");
+      },
       stop: function(event,ui){
       	//catSubscription.stop();
       	var item = $(ui.item);
       	var newCat = item.parent().attr("id");
-      	$.each(item.parent().children(), function(i,val){
-      		var itemId = $(val).attr("item_id");
-      		//console.log(newCat);
-      		//console.log(i);
-      		//console.log(itemId);
-      		updateItemLocation(itemId,newCat,i);
-      	});
-      	item.remove();
+      	if (newCat !== currentCat)
+      	{
+	      	$.each(item.parent().children(), function(i,val){
+	      		var itemId = $(val).attr("item_id");
+	      		//console.log(newCat);
+	      		//console.log(i);
+	      		//console.log(itemId);
+	      		updateItemLocation(itemId,newCat,i);
+	      	});
+	      	item.remove();
+      	}
+      	currentCat = undefined;
       	//catSubscription = subscribeCats();
       }
     });

@@ -53,9 +53,10 @@
 		</div>
 
 		<div class="modal-body">
-
-		  <textarea class="description"></textarea>
-
+			{{#if addDialogError}}
+				<div id="modal-error">{{addDialogError}}</div>
+			{{/if}}
+		 	<textarea class="description"></textarea>
 		</div>
 
 		<div class="modal-footer">

@@ -8,6 +8,12 @@ Template.user.isNameSet = function(){
 Template.user.events({
   'click #name-submit' : function (event,template) {
     Session.set("name",template.find("#full-name").value.trim());
+  },
+  'keypress #full-name' : function(event,template){
+    if (event.charCode === 13)
+    {
+      Session.set("name",template.find("#full-name").value.trim());
+    }
   }
 });
 
@@ -66,21 +72,30 @@ Template.projectsList.full_name = function(){
   return Session.get("name");
 };
 
-/* Template Add Dialoag Box */
+/* Template Add Dialog Box */
 
 Template.addDialog.category = function(){
   return Session.get("showAddDialog");
 };
 
+Template.addDialog.addDialogError = function(){
+  return Session.get("addDialogError");
+};
+
 Template.addDialog.events({
   'click .save': function (event, template) {
-    Categories.insert({
-      type: Session.get("showAddDialog"),
-      user: Session.get("name"),
-      project: Session.get("currentProject")._id,
-      Description: template.find(".description").value.trim()
+    Meteor.call("addNewUserItem", Session.get("name"), Session.get("currentProject")._id, template.find(".description").value.trim(), Session.get("showAddDialog"),function(error, result){
+      console.log(result);
+      if (result != undefined)
+      {
+        Session.set("addDialogError", result);
+      }
+      else
+      {
+        Session.set("showAddDialog",false);
+        Session.set("addDialogError", undefined);        
+      }
     });
-    Session.set("showAddDialog",false);
   },
 
   'click .cancel': function () {
