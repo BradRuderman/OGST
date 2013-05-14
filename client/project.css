@@ -8,12 +8,35 @@
 
 .item{
 	border: 1px black solid;
-	height: 50px;
-	width: 50px;
+	height: 75px;
+	width: 75px;
 	margin: 10px;
 	float:left;
+	background-color: transparent;
 }
 
 #cat-container{
 	clear:both;
-};
+}
+
+.item-text, .item-text-input{
+	background-color:white;
+	outline: none;
+	resize: none;
+	width: 75px;
+	height: 75px;
+	border: none;
+	overflow: auto;
+	text-align: center;
+	font-size:12px;
+	margin:0px;
+	padding:0px;
+	cursor:pointer;
+	position: relative;
+	z-index: 1;
+}
+
+.item-text-input{
+	display: none;
+}
+

@@ -85,13 +85,10 @@ Template.addDialog.addDialogError = function(){
 Template.addDialog.events({
   'click .save': function (event, template) {
     Meteor.call("addNewUserItem", Session.get("name"), Session.get("currentProject")._id, template.find(".description").value.trim(), Session.get("showAddDialog"),function(error, result){
-      console.log(result);
-      if (result != undefined)
-      {
-        Session.set("addDialogError", result);
+      if (error !== undefined){
+        Session.set("addDialogError", error.reason);
       }
-      else
-      {
+      else{
         Session.set("showAddDialog",false);
         Session.set("addDialogError", undefined);        
       }
