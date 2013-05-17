@@ -7,7 +7,8 @@
 </body>
 
 <template name="page">
-	<div id="wrap">
+	{{> nav}}
+	<div id="wrap" class="container">
 		{{#if showAddDialog}}
 			{{> addDialog}}
 		{{/if}}
@@ -20,16 +21,43 @@
 		{{#if currentPageIs 'project'}}
 			{{> project}}
 		{{/if}}
-		<div id="push"></div>
+		<!--<div id="push"></div>-->
 	</div>
+	{{> footer}}
+</template>
+
+<template name="nav">
+	<div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+        	<span class="pull-left cat-back">
+        		{{#if back}}
+        			<i class="icon-circle-arrow-left icon-white"></i>
+        		{{/if}}
+        	</span>
+        	<span class="brand">
+        		{{title}}
+        	</span>
+        	<span class="pull-right">
+        	</div>
+        </div>
+      </div>
+    </div>
+</template>
+
+<template name="footer">
 	<div id="footer" class="navbar navbar-fixed-bottom">
-		<div class="pull-left" id="footer-name">
-			{{# if isNameSet}}
-				<span class="">{{full_name}}</span> (<a id="logout" href="#">Log Out</a>)
-			{{/if}}
-		</div>
-		<div class="pull-right" id="footer-logo">
-			a BGBR Production
+		<div class="navbar-inner" id="footer-inner">
+			<div class="container">
+				<div class="pull-left" id="footer-name">
+					{{# if isNameSet}}
+						<span class="">{{full_name}}</span> (<a id="logout" href="#">Log Out</a>)
+					{{/if}}
+				</div>
+				<div class="pull-right" id="footer-logo">
+					a BGBR Production
+				</div>
+			</div>
 		</div>
     </div>
 </template>

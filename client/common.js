@@ -8,7 +8,9 @@ var Router = Backbone.Router.extend({
   user: function() {
     // Your homepage code
     // for example: Session.set('currentPage', 'homePage');
-    Session.setDefault('currentProject', null);
+    //Session.setDefault('currentProject', null);
+    Session.set('title', "OGST");
+    //Session.set('currentCategory', null);
     Session.set('currentPage','user');
   },
 
@@ -24,7 +26,9 @@ var Router = Backbone.Router.extend({
   }
 });
 var app = new Router;
+
 Meteor.startup(function () {
+  Session.setDefault("title", "OGST");
   Backbone.history.start({pushState: true});
 });
 
@@ -55,19 +59,35 @@ Template.projectsListDd.events({
   }
 });
 
+
+Template.nav.events({
+  'click .cat-back' : function(event,template){
+    Session.set("currentCategory",null);
+    Session.set("title", "OGST");
+  }
+});
+
+Template.nav.back = function(){
+  return Session.get("currentCategory");
+};
+
+Template.nav.title = function(){
+  return Session.get("title");
+}
+
+Template.footer.full_name = function(){
+  return Template.projectsList.full_name();
+};
+
+Template.footer.isNameSet = function(){
+  return Template.user.isNameSet();
+};
+
+
 /* Template Page */
 Template.page.currentPageIs = function(page){
   return Session.get("currentPage") === page;
 };
-
-Template.page.full_name = function(){
-  return Template.projectsList.full_name();
-};
-
-Template.page.isNameSet = function(){
-  return Template.user.isNameSet();
-};
-
 
 Template.page.events({
   'click #logout' : function(event,template){

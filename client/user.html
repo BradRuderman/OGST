@@ -1,67 +1,78 @@
 <template name="user">
 	<div id="user" class="container">
-		{{#if isNameSet}}
-	      	{{> projectsList}}
-	    {{else}}
+		{{#if current}}
+			{{> categories}}
+		{{else}}
 			<h1>Welcome to OGST</h1>
 			<h3>A service provided by Accenture Technology Labs</h3>
-			<p>
-				Enter your name to begin.
-			</p>
-			<div class="input-append">
-			  <input class="span2" id="full-name" type="text" placeholder="Enter Full Name...">
-			  <button class="btn" type="button" id="name-submit">Go!</button>
-			</div>
+			{{#if isNameSet}}
+		      	{{> projectsList}}
+		    {{else}}
+    			<div class="input-append">
+				  <input class="span2" id="full-name" type="text" placeholder="Enter Name to Begin..">
+				  <button class="btn" type="button" id="name-submit">Go!</button>
+				</div>
+		    {{/if}}
 	    {{/if}}
 	</div>
 </template>
 
 <template name="projectsList">
 	{{#if current}}
-		<div class="container" id="project">
-			<h3> {{current.name}} </h3>
-			<div>
-				<p>
-					Click to add an item. Once you add an item you will not be able to edit it. For each category there is a count of the number of items you have added.
-				</p>
-			</div>
-			{{> categories}}
-		</div>
+		<!--<h3> {{current.name}} </h3>
+		<div>
+			<p>
+				Click to add an item. Once you add an item you will not be able to edit it. For each category there is a count of the number of items you have added.
+			</p>
+		</div>-->
 	{{else}}
-		<div class="row" id="project_choice">
-			<span class="help-inline">Select a project from the list to continue.</span>
-			{{> projectsListDd}}
-		</div>
+		{{> projectsListDd}}
 	{{/if}}
 </template>
 
 <template name="categories">
-	{{#each categories_list}}
-		<div class="category" id="{{name}}">
-			<p>{{name}}</p>
-			<p>{{count}}</p>
-		</div>
-	{{/each}}
+	{{#if currentCategory}}
+		{{> categoryAdd}}
+	{{else}}
+		<ul id="cat-list">
+			{{#each categories_list}}
+				<li>
+					<div class="category" id="{{name}}">
+						<span class="cat-name">
+							{{name}}
+						</span>
+						<span class="cat-arrow">
+							<i class="icon-chevron-right"></i>
+						</span>
+					</div>
+				</li>
+			{{/each}}
+		</ul>
+	{{/if}}
 </template>
 
-<template name="addDialog">
-	<div class="modal-backdrop fade in"></div>
-	<div class="modal">
-		<div class="modal-header">
-		  <button type="button" class="close cancel">&times;</button>
-		  <h3>Add {{category}}</h3>
-		</div>
-
-		<div class="modal-body">
-			{{#if addDialogError}}
-				<div id="modal-error">{{addDialogError}}</div>
-			{{/if}}
-		 	<textarea class="description"></textarea>
-		</div>
-
-		<div class="modal-footer">
-		  <a href="#" class="btn btn-primary save">Save</a>
-		</div>
+<template name="categoryAdd">
+	<div id="cat-page">
+		<textarea id="cat-text"></textarea>
+		<a href="#" class="btn btn-primary save pull-right">Save</a>
+	</div>
+	<div id="cat-cards">
+		{{#each items}}
+			{{> catCard}}
+		{{/each}}
 	</div>
 </template>
 
+<template name="catCard">
+	<div class="cat-card" item_id="{{_id}}">
+		<div class="pull-left cat-card-inital {{currentCategory}}">
+			{{currentCategoryInitial}}
+		</div>
+		<div class="pull-right">
+			<i class="icon-remove remove-card"></i>
+		</div>
+		<div class="cat-card-desc">
+			{{Description}}
+		</div>
+	</div>
+</template>

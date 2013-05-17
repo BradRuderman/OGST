@@ -1,5 +1,5 @@
 /* CSS declarations go here */
-#project{
+/*#project{
 	text-align: center;
 }
 
@@ -27,7 +27,7 @@
 
 #Goal{
 	background-color: green;
-}
+}*/
 
 .description{
 	width:97%%;
@@ -41,4 +41,49 @@
 
 #project_choice{
 	margin:25px;
+}
+
+.cat-arrow{
+	float:right;
+}
+.category{
+	height:35px;
+	margin:10px;
+}
+#cat-list{
+	margin-top:10px;
+	font-size: 35px;
+}
+#cat-page{
+	margin-top:10px;
+}
+#cat-text{
+	width:100%;
+	resize:vertical;
+	box-sizing: border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+}
+.cat-card{
+	clear:both;
+	border: 1px black solid;
+	margin-top:10px;
+	height: 80px;
+}
+.cat-card-desc{
+	clear:both;
+	margin-left:5px;
+}
+#cat-cards{
+	margin-top:40px;
+}
+.remove-card{
+	margin:5px;
+}
+.cat-card-inital{
+	padding:5px;
+}
+.Objective{
+	background-color: blue;
 }

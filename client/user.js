@@ -10,8 +10,7 @@ Template.user.events({
     Session.set("name",template.find("#full-name").value.trim());
   },
   'keypress #full-name' : function(event,template){
-    if (event.charCode === 13)
-    {
+    if (event.charCode === 13){
       Session.set("name",template.find("#full-name").value.trim());
     }
   }
@@ -21,32 +20,32 @@ Template.user.events({
 /* Template Categories */
 
 
-var getListCount = function(typeName){
-  return Categories.find( { "type": typeName, "user" : Session.get("name"), "project" : Session.get("currentProject")._id }).count();
+var getList = function(typeName){
+  return Categories.find( { "type": typeName, "user" : Session.get("name"), "project" : Session.get("currentProject")._id }, {sort: {date_created: -1}});
 };
 
 Template.categories.categories_list = [
     {
       name: "Objective",
-      count: function(){
+      items: function(){
         return getListCount("Objective");
       }
     }, 
     {
       name: "Goal", 
-      count: function(){
+      items: function(){
         return getListCount("Goal");
       }
     },
     {
       name: "Strategy",
-      count: function(){
+      items: function(){
         return getListCount("Strategy");
       }
     },
     {
       name: "Tatic",
-      count: function(){
+      items: function(){
         return getListCount("Tatic");
       }
     }
@@ -54,13 +53,52 @@ Template.categories.categories_list = [
 
 Template.categories.events({
   'click .category' : function(event,template){
-    Session.set("showAddDialog",$(event.currentTarget).attr('id'));
+    var cat = $(event.currentTarget).attr('id');
+    Session.set("currentCategory", cat);
+    Session.set("title", cat);
   }
 });
 
+Template.categories.currentCategory = function(){
+  return Session.get("currentCategory");
+};
+
+Template.catCard.currentCategory = function(){
+  return Session.get("currentCategory");
+}
+
+Template.catCard.currentCategoryInitial = function() {
+  return Session.get("currentCategory").trim().substring(0,1);
+};
+
+Template.catCard.events({
+  "click .remove-card" : function(event,template){
+    var itemId = $(event.srcElement).parent().parent().attr("item_id");
+    Meteor.call("removeUserItem",this.user, itemId, function(error, result){
+    });
+  }
+});
+
+Template.categoryAdd.items = function(){
+  return getList(Session.get("currentCategory"));
+};
+
+Template.categoryAdd.events({
+  "click .save" : function(event,template){
+    Meteor.call("addNewUserItem", Session.get("name"), Session.get("currentProject")._id, template.find("#cat-text").value.trim(), Session.get("currentCategory"),function(error, result){
+      if (error !== undefined){
+        Session.set("addDialogError", error.reason);
+      }
+      else{
+        $('#cat-text').val('');
+        Session.set("addDialogError", undefined);        
+      }
+    });
+  }
+});
 
 /* Template ProjectList */
-Template.projectsList.current = function(){
+Template.user.current = function(){
   return Session.get("currentProject");
 };
 
@@ -72,7 +110,7 @@ Template.projectsList.full_name = function(){
   return Session.get("name");
 };
 
-/* Template Add Dialog Box */
+/* Template Add Dialog Box 
 
 Template.addDialog.category = function(){
   return Session.get("showAddDialog");
@@ -98,5 +136,5 @@ Template.addDialog.events({
   'click .cancel': function () {
     Session.set("showAddDialog", false);
   }
-});
+});*/
 

@@ -14,6 +14,17 @@ Meteor.methods({
 	      project: project,
 	      Description: description
     });
+  },
+  removeUserItem: function(user, itemId){
+  	console.log(user);
+  	console.log(itemId);
+  	console.log(this.userId);
+  	if(user !== Categories.findOne(itemId).user){
+  		if (! this.userId){
+  			return "Access Denied";	
+  		}
+  	}
+  	Categories.remove(itemId);
   }
 });
 
@@ -47,10 +58,13 @@ Categories.allow({
 		return true;
 	},
 	remove: function(userId,doc){
+		/*		
 		if (!userId) {
 			return false;
 		}
 		return true;
+		*/
+		return false;
 	}
 });
 
