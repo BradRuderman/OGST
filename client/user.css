@@ -72,8 +72,9 @@
 	height: 80px;
 }
 .cat-card-desc{
-	clear:both;
 	margin-left:5px;
+	height: 100%;
+	overflow-y: scroll;
 }
 #cat-cards{
 	margin-top:40px;
@@ -82,8 +83,16 @@
 	margin:5px;
 }
 .cat-card-inital{
-	padding:5px;
+	padding:2px;
+	font-size: 24px;
 }
-.Objective{
-	background-color: blue;
+.Objective-initial{
+	color: blue;
+}
+#cat-list{
+	margin-left:0px;
+}
+.pad{
+	padding-left: 10px;
+	padding-right: 10px;
 }

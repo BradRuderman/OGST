@@ -1,18 +1,20 @@
 <template name="user">
-	<div id="user" class="container">
+	<div id="user" class="container-fluid">
 		{{#if current}}
 			{{> categories}}
 		{{else}}
-			<h1>Welcome to OGST</h1>
-			<h3>A service provided by Accenture Technology Labs</h3>
-			{{#if isNameSet}}
-		      	{{> projectsList}}
-		    {{else}}
-    			<div class="input-append">
-				  <input class="span2" id="full-name" type="text" placeholder="Enter Name to Begin..">
-				  <button class="btn" type="button" id="name-submit">Go!</button>
-				</div>
-		    {{/if}}
+			<div class="pad">
+				<h1>Welcome to OGST</h1>
+				<h3>A service provided by Accenture Technology Labs</h3>
+				{{#if isNameSet}}
+			      	{{> projectsList}}
+			    {{else}}
+	    			<div class="input-append">
+					  <input class="span2" id="full-name" type="text" placeholder="Enter Name to Begin..">
+					  <button class="btn" type="button" id="name-submit">Go!</button>
+					</div>
+			    {{/if}}
+		    </div>
 	    {{/if}}
 	</div>
 </template>
@@ -32,7 +34,9 @@
 
 <template name="categories">
 	{{#if currentCategory}}
-		{{> categoryAdd}}
+		<div class="pad">
+			{{> categoryAdd}}
+		</div>
 	{{else}}
 		<ul id="cat-list">
 			{{#each categories_list}}
@@ -65,10 +69,10 @@
 
 <template name="catCard">
 	<div class="cat-card" item_id="{{_id}}">
-		<div class="pull-left cat-card-inital {{currentCategory}}">
+		<div class="pull-left cat-card-inital {{currentCategory}}-initial fixed">
 			{{currentCategoryInitial}}
 		</div>
-		<div class="pull-right">
+		<div class="pull-right fixed cat-delete">
 			<i class="icon-remove remove-card"></i>
 		</div>
 		<div class="cat-card-desc">

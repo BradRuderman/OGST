@@ -25,6 +25,11 @@ body{
 }
 
 @media (max-width: 767px) {
+  body{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
   .navbar-fixed-top,
   .navbar-fixed-bottom,
   .navbar-static-top {
@@ -60,7 +65,7 @@ body{
   z-index: 5;
 }
 
-ul{
+ul {
   list-style-type: none;
 }
 

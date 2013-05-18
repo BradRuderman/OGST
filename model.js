@@ -12,13 +12,14 @@ Meteor.methods({
 	      type: type,
 	      user: name,
 	      project: project,
-	      Description: description
+	      Description: description,
+	      date_created: Date()
     });
   },
   removeUserItem: function(user, itemId){
-  	console.log(user);
-  	console.log(itemId);
-  	console.log(this.userId);
+  	//console.log(user);
+  	//console.log(itemId);
+  	//console.log(this.userId);
   	if(user !== Categories.findOne(itemId).user){
   		if (! this.userId){
   			return "Access Denied";	

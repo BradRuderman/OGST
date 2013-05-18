@@ -1,6 +1,6 @@
 Meteor.startup(function () {
 	if (Meteor.users.find().count() === 0) {
-	  Accounts.createUser({"email":"admin@test.com", "password":"test"});
+	  Accounts.createUser({"email":"admin@test.com", "password":"test" });
 	}
 });
 
