@@ -62,6 +62,7 @@ Template.projectsListDd.events({
 
 Template.nav.events({
   'tap, click .cat-back' : function(event,template){
+    Session.set("addNewUserItemError", undefined);
     Session.set("currentCategory",null);
     Session.set("title", "OGST");
   }

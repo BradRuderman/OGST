@@ -7,6 +7,8 @@ Template.user.isNameSet = function(){
 
 Template.user.events({
   'click #name-submit' : function (event,template) {
+    window.scrollTo(0,0)
+    //alert('hi');
     Session.set("name",template.find("#full-name").value.trim());
   },
   'keypress #full-name' : function(event,template){
@@ -28,25 +30,37 @@ Template.categories.categories_list = [
     {
       name: "Objective",
       items: function(){
-        return getListCount("Objective");
+        return getList("Objective");
+      },
+      count: function(){
+        return getList("Objective").count();
       }
     }, 
     {
       name: "Goal", 
       items: function(){
-        return getListCount("Goal");
+        return getList("Goal");
+      },
+      count: function(){
+        return getList("Goal").count();
       }
     },
     {
       name: "Strategy",
       items: function(){
-        return getListCount("Strategy");
+        return getList("Strategy");
+      },
+      count: function(){
+        return getList("Strategy").count();
       }
     },
     {
       name: "Tatic",
       items: function(){
-        return getListCount("Tatic");
+        return getList("Tatic");
+      },
+      count: function(){
+        return getList("Tatic").count();
       }
     }
   ];
@@ -72,7 +86,7 @@ Template.catCard.currentCategoryInitial = function() {
 };
 
 Template.catCard.events({
-  "click,tap .remove-card" : function(event,template){
+  "tap, click .cat-delete" : function(event,template){
     var itemId = $(event.srcElement).parent().parent().attr("item_id");
     Meteor.call("removeUserItem",this.user, itemId, function(error, result){
     });
