@@ -57,6 +57,7 @@
 
 <template name="categoryAdd">
 	<div id="cat-page">
+		<div id="cat-error">{{categoryAddError}}</div>
 		<textarea id="cat-text"></textarea>
 		<a href="#" class="btn btn-primary save pull-right">Save</a>
 	</div>
@@ -69,10 +70,10 @@
 
 <template name="catCard">
 	<div class="cat-card" item_id="{{_id}}">
-		<div class="pull-left cat-card-inital {{currentCategory}}-initial fixed">
+		<div class="pull-left cat-card-inital {{currentCategory}}-initial">
 			{{currentCategoryInitial}}
 		</div>
-		<div class="pull-right fixed cat-delete">
+		<div class="pull-right cat-delete">
 			<i class="icon-remove remove-card"></i>
 		</div>
 		<div class="cat-card-desc">

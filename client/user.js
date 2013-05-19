@@ -72,7 +72,7 @@ Template.catCard.currentCategoryInitial = function() {
 };
 
 Template.catCard.events({
-  "click .remove-card" : function(event,template){
+  "click,tap .remove-card" : function(event,template){
     var itemId = $(event.srcElement).parent().parent().attr("item_id");
     Meteor.call("removeUserItem",this.user, itemId, function(error, result){
     });
@@ -87,15 +87,19 @@ Template.categoryAdd.events({
   "click .save" : function(event,template){
     Meteor.call("addNewUserItem", Session.get("name"), Session.get("currentProject")._id, template.find("#cat-text").value.trim(), Session.get("currentCategory"),function(error, result){
       if (error !== undefined){
-        Session.set("addDialogError", error.reason);
+        Session.set("addNewUserItemError", error.reason);
       }
       else{
         $('#cat-text').val('');
-        Session.set("addDialogError", undefined);        
+        Session.set("addNewUserItemError", undefined);        
       }
     });
   }
 });
+
+Template.categoryAdd.categoryAddError = function(){
+  return Session.get("addNewUserItemError");
+};
 
 /* Template ProjectList */
 Template.user.current = function(){
