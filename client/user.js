@@ -86,7 +86,7 @@ Template.catCard.currentCategoryInitial = function() {
 };
 
 Template.catCard.events({
-  "tap, click .cat-delete" : function(event,template){
+  "tap .remove-card" : function(event,template){
     var itemId = $(event.srcElement).parent().parent().attr("item_id");
     Meteor.call("removeUserItem",this.user, itemId, function(error, result){
     });
@@ -99,7 +99,7 @@ Template.categoryAdd.items = function(){
 
 Template.categoryAdd.events({
   "click .save" : function(event,template){
-    Meteor.call("addNewUserItem", Session.get("name"), Session.get("currentProject")._id, template.find("#cat-text").value.trim(), Session.get("currentCategory"),function(error, result){
+    Meteor.call("addNewUserItem", Template.projectsList.full_name(), Session.get("currentProject")._id, template.find("#cat-text").value.trim(), Session.get("currentCategory"),function(error, result){
       if (error !== undefined){
         Session.set("addNewUserItemError", error.reason);
       }
@@ -127,32 +127,4 @@ Template.projectsList.full_name = function(){
   }
   return Session.get("name");
 };
-
-/* Template Add Dialog Box 
-
-Template.addDialog.category = function(){
-  return Session.get("showAddDialog");
-};
-
-Template.addDialog.addDialogError = function(){
-  return Session.get("addDialogError");
-};
-
-Template.addDialog.events({
-  'click .save': function (event, template) {
-    Meteor.call("addNewUserItem", Session.get("name"), Session.get("currentProject")._id, template.find(".description").value.trim(), Session.get("showAddDialog"),function(error, result){
-      if (error !== undefined){
-        Session.set("addDialogError", error.reason);
-      }
-      else{
-        Session.set("showAddDialog",false);
-        Session.set("addDialogError", undefined);        
-      }
-    });
-  },
-
-  'click .cancel': function () {
-    Session.set("showAddDialog", false);
-  }
-});*/
 

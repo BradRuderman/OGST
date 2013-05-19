@@ -17,7 +17,10 @@ Meteor.methods({
     });
   },
   removeUserItem: function(user, itemId){
+  	//console.log("IN");
   	//console.log(user);
+  	//console.log(itemId);
+  	//console.log(Categories.findOne(itemId).user);
   	//console.log(itemId);
   	//console.log(this.userId);
   	if(user !== Categories.findOne(itemId).user){
@@ -25,7 +28,7 @@ Meteor.methods({
   			return "Access Denied";	
   		}
   	}
-  	Categories.remove(itemId);
+  	return Categories.remove(itemId);
   }
 });
 

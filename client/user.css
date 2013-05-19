@@ -82,6 +82,13 @@
 .remove-card{
 	margin:5px;
 }
+.cat-delete{
+	position: relative;
+	z-index: 5;
+	display: block;
+	width: 24px;
+	height: 25px;
+}
 .cat-card-inital{
 	padding:2px;
 	font-size: 24px;
@@ -97,10 +104,10 @@
 	padding-right: 10px;
 }
 .cat-icon{
-	margin-top: 6px;
+	margin-top: 5px;
 }
 .cat-count{
 	font-size:20px;
 	float:left;
-	margin-top:4px;
+	margin-top:2px;
 }
