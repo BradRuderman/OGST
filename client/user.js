@@ -86,8 +86,8 @@ Template.catCard.currentCategoryInitial = function() {
 };
 
 Template.catCard.events({
-  "tap .remove-card" : function(event,template){
-    var itemId = $(event.srcElement).parent().parent().attr("item_id");
+  "click .cat-delete" : function(event,template){
+    var itemId = $(event.srcElement).closest(".cat-card").attr("item_id");
     Meteor.call("removeUserItem",this.user, itemId, function(error, result){
     });
   }

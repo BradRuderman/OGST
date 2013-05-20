@@ -80,14 +80,16 @@
 	margin-top:40px;
 }
 .remove-card{
-	margin:5px;
+	margin-left:15px;
+	margin-top:5px;
+	line-height: 25px;
 }
 .cat-delete{
 	position: relative;
 	z-index: 5;
 	display: block;
-	width: 24px;
-	height: 25px;
+	width: 35px;
+	height: 35px;
 }
 .cat-card-inital{
 	padding:2px;
