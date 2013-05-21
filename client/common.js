@@ -9,14 +9,16 @@ var Router = Backbone.Router.extend({
     // Your homepage code
     // for example: Session.set('currentPage', 'homePage');
     //Session.setDefault('currentProject', null);
+    Session.set("addNewUserItemError", undefined);
     Session.set('title', "OGST");
-    //Session.set('currentCategory', null);
+    Session.set('currentCategory', null);
     Session.set('currentPage','user');
   },
 
   admin: function() {
     // Help page
     Session.setDefault('currentProject', null);
+    Session.setDefault('');
     Session.set('currentPage','admin');
   },
 
@@ -93,7 +95,7 @@ Template.page.currentPageIs = function(page){
 Template.page.events({
   'click #logout' : function(event,template){
     Session.set("name",null);
-    Session.set("currentProject",undefined)
+    Session.set("currentProject",null)
     Meteor.logout();
     app.navigate("/", {"trigger" : true});
   }

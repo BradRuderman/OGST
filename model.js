@@ -4,6 +4,10 @@ Categories = new Meteor.Collection("categories");
 
 Meteor.methods({
   addNewUserItem: function (name, project, description, type) {
+  	//console.log(name);
+  	//console.log(project);
+  	//console.log(description);
+  	//console.log(type);
   	//console.log("desc:" + description.trim().length);
     if (description.trim().length <= 0 ) {
 	    throw new Meteor.Error(400, "Description can't be empty!");

@@ -23,7 +23,7 @@ Template.user.events({
 
 
 var getList = function(typeName){
-  return Categories.find( { "type": typeName, "user" : Session.get("name"), "project" : Session.get("currentProject")._id }, {sort: {date_created: -1}});
+  return Categories.find( { "type": typeName, "user" : Template.projectsList.full_name(), "project" : Session.get("currentProject")._id }, {sort: {date_created: -1}});
 };
 
 Template.categories.categories_list = [
@@ -121,7 +121,7 @@ Template.user.current = function(){
 };
 
 Template.projectsList.full_name = function(){
-  if (Meteor.user() != undefined)
+  if (Meteor.user() !== undefined)
   {
     return Meteor.user().emails[0].address;
   }
