@@ -121,7 +121,7 @@ Template.user.current = function(){
 };
 
 Template.projectsList.full_name = function(){
-  if (Meteor.user() !== undefined)
+  if (Meteor.user())
   {
     return Meteor.user().emails[0].address;
   }
